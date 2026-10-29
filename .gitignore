@@ -1,0 +1,10 @@
+# 临时文件
+_*.png
+_cp*/
+_chrome/
+node_modules/
+.DS_Store
+Thumbs.db
+
+# 校验器可选产物
+*.log

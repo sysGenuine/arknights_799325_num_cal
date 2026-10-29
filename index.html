@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>799325 数字论证器</title>
+<meta name="description" content="只用 7 9 9 3 2 5 这一串数字，通过加减乘除与括号，论证任意数字。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f3e9d2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15110d" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="shell">
+
+  <header class="hero">
+    <div class="hero-top">
+      <p class="eyebrow">DIGIT ARGUMENTATOR<span class="eyebrow-sep" aria-hidden="true">·</span>799325</p>
+      <button id="theme" class="theme-btn" type="button" aria-label="主题：跟随系统"></button>
+    </div>
+    <h1 class="title">
+      <span class="title-number"><span class="d d7">7</span><span class="d d9">9</span><span class="d d9">9</span><span class="d d3">3</span><span class="d d2">2</span><span class="d d5">5</span></span>
+      <span class="title-text">数字论证器</span>
+    </h1>
+    <p class="subtitle">只借用 <b>7 9 9 3 2 5</b> <span class="nowrap">这一串数字</span>，用 <span class="mono nowrap">+ − × ÷</span> <span class="nowrap">和括号</span>，<span class="nowrap">论证出任意数字</span>。</p>
+  </header>
+
+  <section class="card input-card" aria-labelledby="input-label">
+    <h2 id="input-label" class="sr-only">输入一个数字</h2>
+    <div class="field">
+      <span class="field-prefix" aria-hidden="true">N =</span>
+      <input id="number" class="number-input" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="64" placeholder="2024 / -7 / 3.14" autofocus aria-label="输入一个数字">
+      <button id="clear" class="clear-btn" type="button" aria-label="清空输入" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="actions">
+      <button id="random" class="btn btn-primary" type="button">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>
+        <span>随机</span>
+      </button>
+      <span class="hint" aria-hidden="true">回车立即论证 · Esc 清空</span>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="示例数字">
+      <button class="chip" type="button" data-value="2024">2024</button>
+      <button class="chip" type="button" data-value="666">666</button>
+      <button class="chip" type="button" data-value="314159">314159</button>
+      <button class="chip" type="button" data-value="8888">8888</button>
+      <button class="chip" type="button" data-value="-7">-7</button>
+      <button class="chip" type="button" data-value="3.14">3.14</button>
+    </div>
+  </section>
+
+  <section class="card result-card" aria-labelledby="result-label">
+    <div class="card-head">
+      <h2 id="result-label" class="label">论证结果</h2>
+      <button id="copy" class="btn btn-copy" type="button" disabled aria-label="复制 ASCII 表达式">
+        <span class="copy-icon icon-copy" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </span>
+        <span class="copy-icon icon-check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <span class="btn-label">复制</span>
+      </button>
+    </div>
+    <div id="result" class="result"></div>
+    <p id="result-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+    <details class="howto">
+      <summary>它是怎么做到的？</summary>
+      <div class="howto-body">
+        <p>先把 7 9 9 3 2 5 这一整串能表示的数全部枚举出来——一共 <b id="howto-table">1,660</b> 个整数。</p>
+        <p>再把目标数拆成「块 × 商 + 余数」，对余数递归展开。所以大多数数字都要复用整串数字 2～5 次，并不是一次凑出来的。</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="stats" aria-label="统计信息">
+    <div class="stat">
+      <span class="stat-label">表达式长度</span>
+      <span class="stat-value is-idle" id="stat-length"><b>—</b><i class="stat-unit">字符</i></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">数字块复用</span>
+      <span class="stat-value is-idle" id="stat-blocks"><b>—</b><i class="stat-unit">块</i></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">已论证</span>
+      <span class="stat-value" id="stat-runs"><b>0</b><i class="stat-unit">次</i></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">引擎库容量</span>
+      <span class="stat-value is-idle" id="stat-table"><b>—</b><i class="stat-unit">条</i></span>
+    </div>
+  </section>
+
+  <p class="rule"><span class="rule-label">规则</span>7 9 9 3 2 5 必须按序出现，可拼接；必要时整串重复使用；只用 + − × ÷ 与括号。</p>
+
+  <footer class="footer">
+    <p class="footer-note">仅使用 7 9 9 3 2 5｜灵感来自 itorr/homo</p>
+    <p class="footer-sub">纯静态页面 · 无外部依赖 · 离线可用</p>
+  </footer>
+
+</main>
+<noscript><p class="noscript">需要启用 JavaScript 才能使用这个工具。</p></noscript>
+<script src="homo.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
