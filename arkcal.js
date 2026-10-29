@@ -1,5 +1,5 @@
 /*!
- * homo799325 —— 用 7 9 9 3 2 5 表示任意数字
+ * arkcal —— 用 7 9 9 3 2 5 表示任意数字
  * 规则：6 个数字必须按 7→9→9→3→2→5 的顺序出现；可拼接（79、799、799325…）；
  *      只用 + - * / 与括号。数字串可以按序重复使用。
  * 思路承自 itorr/homo（恶臭数字论证器）：先枚举「一整串能表示的数」，再贪心分解。
@@ -188,7 +188,7 @@
 			return { int: Number(big), scale: frac.length, neg: neg, zero: big === 0n };
 		}
 
-		function homo799325(input) {
+		function arkcal(input) {
 			var r = toRational(input);
 			var body;
 			if (r.scale === 0) {
@@ -202,7 +202,7 @@
 		}
 
 		var maxBlock = Math.max.apply(null, values);
-		homo799325.meta = {
+		arkcal.meta = {
 			table: values.length + 1,   // 含 0
 			max: maxBlock,
 			maxBlock: maxBlock,
@@ -210,11 +210,11 @@
 			maxAbs: MAX_ABS
 		};
 
-		return homo799325;
+		return arkcal;
 	}
 
 	var api = build();
-	global.homo799325 = api;
+	global.arkcal = api;
 	if (typeof module === "object" && module.exports) module.exports = api;
 
 })(typeof window !== "undefined" ? window : globalThis);

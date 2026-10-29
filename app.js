@@ -1,14 +1,14 @@
 /* ==========================================================================
    799325 数字论证器 — 交互逻辑
-   依赖同目录 arkcal.js 提供的 window.homo799325(value) -> string
+   依赖同目录 arkcal.js 提供的 window.arkcal(value) -> string
    ========================================================================== */
 (function () {
   "use strict";
 
-  var ENGINE_KEY = "homo799325";
+  var ENGINE_KEY = "arkcal";
   var DEBOUNCE_MS = 120;
   var COPY_FEEDBACK_MS = 1500;
-  var THEME_KEY = "homo799325-theme";
+  var THEME_KEY = "arkcal-theme";
   var PALETTE = { "7": "d7", "9": "d9", "3": "d3", "2": "d2", "5": "d5" };
   var OPERATORS = "+-*/()";
   var GLYPHS = { "-": "\u2212", "*": "\u00d7", "/": "\u00f7" };

@@ -6,7 +6,7 @@
 
 ## 目录与文件（全部放在 D:\\dsh\\sessions\\799325\\）
 
-- `arkcal.js`   引擎（Lead 负责）——普通 <script> 引入，定义全局 `homo799325(n)`
+- `arkcal.js`   引擎（Lead 负责）——普通 <script> 引入，定义全局 `arkcal(n)`
 - `index.html` 页面（ui 负责）
 - `style.css`  样式（ui 负责）
 - `app.js`     交互逻辑（ui 负责）
@@ -16,7 +16,7 @@
 ## 一、引擎 API（arkcal.js）
 
 ```js
-window.homo799325(value) -> string
+window.arkcal(value) -> string
 ```
 
 - 入参：number 或数字字符串（可含负号、小数点）。
@@ -25,7 +25,7 @@ window.homo799325(value) -> string
 - 负数：以 `-` 开头，例如 `-(7+9+...)`。
 - 小数（最多 6 位）：形式为 `(<整数表达式>)/(<10^k 的表达式>)`。
 - 非法输入（空、NaN、Infinity、非数字、绝对值过大）：throw new Error("中文提示")。
-- 附带 `homo799325.meta = { table: 整数个数, max: 最大可单块表示的整数 }`。
+- 附带 `arkcal.meta = { table: 整数个数, max: 最大可单块表示的整数 }`。
 
 **硬性约束**：去掉所有运算符与括号后，得到的数字串必须由若干次 `799325` 拼接而成
 （即正则 `^(799325)+$`）。校验脚本会检查这一点。

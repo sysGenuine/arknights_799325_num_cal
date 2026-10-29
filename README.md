@@ -36,7 +36,7 @@
 | 文件 | 说明 |
 | --- | --- |
 | `index.html` / `style.css` / `app.js` | 页面：实时输入、逐位着色、复制、随机、折叠、亮暗主题 |
-| `arkcal.js` | 引擎：`window.homo799325(value) -> string`，`homo799325.meta` |
+| `arkcal.js` | 引擎：`window.arkcal(value) -> string`，`arkcal.meta` |
 | `verify.js` | 独立校验器：BigInt 求值 + 数字串顺序校验，33,586 项 |
 | `SPEC.md` | 项目契约 |
 | `preview.png` | 页面截图 |

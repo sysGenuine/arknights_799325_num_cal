@@ -13,7 +13,7 @@
  * 退出码:
  *   0  全部通过
  *   1  有校验失败（会打印前 10 个反例）
- *   2  引擎不存在 / 加载失败 / 未定义 window.homo799325（引擎尚未完成）
+ *   2  引擎不存在 / 加载失败 / 未定义 window.arkcal（引擎尚未完成）
  *   3  校验器内部自检失败（解析器 / 分数运算本身有 bug）
  *   64 命令行参数错误
  *
@@ -408,15 +408,15 @@ function loadEngine(enginePath) {
   }
 
   const candidates = [];
-  if (loaded.sandbox.window) candidates.push(['window.homo799325', loaded.sandbox.window.homo799325]);
-  candidates.push(['globalThis.homo799325', loaded.sandbox.homo799325]);
+  if (loaded.sandbox.window) candidates.push(['window.arkcal', loaded.sandbox.window.arkcal]);
+  candidates.push(['globalThis.arkcal', loaded.sandbox.arkcal]);
 
   let fn = null;
   for (const pair of candidates) {
     if (typeof pair[1] === 'function') { fn = pair[1]; break; }
   }
   if (typeof fn !== 'function') {
-    result.reasons.push('引擎已执行，但没有找到函数 window.homo799325（含 globalThis.homo799325 兜底）。');
+    result.reasons.push('引擎已执行，但没有找到函数 window.arkcal（含 globalThis.arkcal 兜底）。');
     const seen = [];
     if (loaded.sandbox.window) {
       for (const k of Object.keys(loaded.sandbox.window)) {
@@ -674,7 +674,7 @@ function main() {
     console.error('');
     console.error('!! 引擎尚未就绪，无法校验（退出码 2）!!');
     for (const r of engine.reasons) console.error('   - ' + r);
-    console.error('   请确认 D:\\dsh\\sessions\\799325\\arkcal.js 已写好并定义 window.homo799325(value)。');
+    console.error('   请确认 D:\\dsh\\sessions\\799325\\arkcal.js 已写好并定义 window.arkcal(value)。');
     process.exit(2);
   }
   const fn = engine.fn;
@@ -737,13 +737,13 @@ function main() {
   const notes = [];
   try {
     const meta = fn.meta;
-    if (!meta || typeof meta !== 'object') notes.push('homo799325.meta 不存在（SPEC 要求 { table, max }）');
+    if (!meta || typeof meta !== 'object') notes.push('arkcal.meta 不存在（SPEC 要求 { table, max }）');
     else {
       if (typeof meta.table !== 'number') notes.push('meta.table 不是 number');
       if (typeof meta.max !== 'number') notes.push('meta.max 不是 number');
     }
   } catch (e) {
-    notes.push('读取 homo799325.meta 抛错: ' + e.message);
+    notes.push('读取 arkcal.meta 抛错: ' + e.message);
   }
   const badInputs = [[NaN, 'NaN'], [Infinity, 'Infinity'], ['', '空字符串'], ['abc', '非数字字符串']];
   for (const pair of badInputs) {
