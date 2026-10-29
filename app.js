@@ -1,6 +1,6 @@
 /* ==========================================================================
    799325 数字论证器 — 交互逻辑
-   依赖同目录 homo.js 提供的 window.homo799325(value) -> string
+   依赖同目录 arkcal.js 提供的 window.homo799325(value) -> string
    ========================================================================== */
 (function () {
   "use strict";
@@ -300,7 +300,7 @@
 
     var engine = window[ENGINE_KEY];
     if (typeof engine !== "function") {
-      renderError("\u8bba\u8bc1\u5f15\u64ce\u8fd8\u6ca1\u52a0\u8f7d\u597d\u3002\u8bf7\u786e\u8ba4 homo.js \u4e0e index.html \u5728\u540c\u4e00\u76ee\u5f55\u3002");
+      renderError("\u8bba\u8bc1\u5f15\u64ce\u8fd8\u6ca1\u52a0\u8f7d\u597d\u3002\u8bf7\u786e\u8ba4 arkcal.js \u4e0e index.html \u5728\u540c\u4e00\u76ee\u5f55\u3002");
       return false;
     }
 

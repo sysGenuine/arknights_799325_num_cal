@@ -2,7 +2,6 @@
 
 把**任意数字**，用 `7 9 9 3 2 5` 这一串数字，只通过 `+ − × ÷` 与括号表示出来。
 灵感与架构来自 [itorr/homo（恶臭数字论证器）](https://github.com/itorr/homo)。
-ds许愿式编程强势驱动
 
 ## 打开
 
@@ -37,7 +36,7 @@ ds许愿式编程强势驱动
 | 文件 | 说明 |
 | --- | --- |
 | `index.html` / `style.css` / `app.js` | 页面：实时输入、逐位着色、复制、随机、折叠、亮暗主题 |
-| `homo.js` | 引擎：`window.homo799325(value) -> string`，`homo799325.meta` |
+| `arkcal.js` | 引擎：`window.homo799325(value) -> string`，`homo799325.meta` |
 | `verify.js` | 独立校验器：BigInt 求值 + 数字串顺序校验，33,586 项 |
 | `SPEC.md` | 项目契约 |
 | `preview.png` | 页面截图 |

@@ -3,9 +3,9 @@
  * verify.js — 「799325 数字论证器」独立校验脚本（Node，无第三方依赖）
  *
  * 用法:
- *   node verify.js                    校验同目录 homo.js
+ *   node verify.js                    校验同目录 arkcal.js
  *   node verify.js --quick            快速冒烟（约 900 项，用于开发期）
- *   node verify.js --engine=<path>    指定引擎文件（默认 __dirname/homo.js）
+ *   node verify.js --engine=<path>    指定引擎文件（默认 __dirname/arkcal.js）
  *   node verify.js --verbose          额外打印每个 suite 的细节
  *   node verify.js --no-progress      不打印 PASS 进度行
  *   node verify.js --selftest         只跑「校验器自检」，不加载引擎
@@ -21,7 +21,7 @@
  *   - 递归下降解析 + - * / 括号、前导负号、任意空白；用 BigInt 分数精确求值；全程禁用 eval / Function。
  *   - 归一化：把表达式中所有数字 token 拼起来，必须匹配 ^(799325)+$。
  *   - 每个返回值同时检查：string / 非空 / 字符集 / 精确值 / 数字串顺序。
- *   - homo.js 是浏览器全局脚本，这里用 vm 造一个带 window 的沙箱执行源码，不改动引擎文件。
+ *   - arkcal.js 是浏览器全局脚本，这里用 vm 造一个带 window 的沙箱执行源码，不改动引擎文件。
  */
 
 'use strict';
@@ -32,7 +32,7 @@ const vm = require('vm');
 const crypto = require('crypto');
 
 const SCRIPT_DIR = __dirname;
-const DEFAULT_ENGINE = path.join(SCRIPT_DIR, 'homo.js');
+const DEFAULT_ENGINE = path.join(SCRIPT_DIR, 'arkcal.js');
 const DIGITS_RE = /^(799325)+$/;
 const ALLOWED_CHARS_RE = /^[0-9+\-*\/()\s]+$/;
 const MAX_EXPR_LEN = 2000000; // 单条表达式长度上限（防止异常输出把校验器拖死）
@@ -353,7 +353,7 @@ function runSelfTest() {
 }
 
 /* =========================================================================
- * 6. 加载引擎（vm + window shim，不修改 homo.js）
+ * 6. 加载引擎（vm + window shim，不修改 arkcal.js）
  * ========================================================================= */
 
 function loadEngine(enginePath) {
@@ -390,7 +390,7 @@ function loadEngine(enginePath) {
     // 引擎若在加载期碰了 document 等浏览器 API，给一个最小桩再试一次（并记录警告）
     const msg = (e1 && e1.message) ? e1.message : String(e1);
     if (/document|navigator|HTMLElement|localStorage/.test(msg)) {
-      result.warnings.push('引擎在加载阶段访问了浏览器 DOM API（' + msg + '），已用最小桩重试；建议 homo.js 只做纯计算。');
+      result.warnings.push('引擎在加载阶段访问了浏览器 DOM API（' + msg + '），已用最小桩重试；建议 arkcal.js 只做纯计算。');
       try {
         loaded = attempt({
           document: { addEventListener: function () {}, querySelector: function () { return null; }, getElementById: function () { return null; }, readyState: 'complete' },
@@ -674,7 +674,7 @@ function main() {
     console.error('');
     console.error('!! 引擎尚未就绪，无法校验（退出码 2）!!');
     for (const r of engine.reasons) console.error('   - ' + r);
-    console.error('   请确认 D:\\dsh\\sessions\\799325\\homo.js 已写好并定义 window.homo799325(value)。');
+    console.error('   请确认 D:\\dsh\\sessions\\799325\\arkcal.js 已写好并定义 window.homo799325(value)。');
     process.exit(2);
   }
   const fn = engine.fn;

@@ -6,14 +6,14 @@
 
 ## 目录与文件（全部放在 D:\\dsh\\sessions\\799325\\）
 
-- `homo.js`   引擎（Lead 负责）——普通 <script> 引入，定义全局 `homo799325(n)`
+- `arkcal.js`   引擎（Lead 负责）——普通 <script> 引入，定义全局 `homo799325(n)`
 - `index.html` 页面（ui 负责）
 - `style.css`  样式（ui 负责）
 - `app.js`     交互逻辑（ui 负责）
 - `verify.js`  Node 校验脚本（qa 负责）
 - `SPEC.md`    本文件
 
-## 一、引擎 API（homo.js）
+## 一、引擎 API（arkcal.js）
 
 ```js
 window.homo799325(value) -> string
@@ -32,7 +32,7 @@ window.homo799325(value) -> string
 
 ## 二、页面（index.html / style.css / app.js）
 
-- 只依赖同目录 `homo.js` + `app.js`，**无外链、无 CDN、无框架**，双击 index.html 即可用。
+- 只依赖同目录 `arkcal.js` + `app.js`，**无外链、无 CDN、无框架**，双击 index.html 即可用。
 - 交互：输入框实时出结果（防抖 ≤150ms），回车立即结算；空输入显示引导态。
 - 结果区：`N =` 大号表达式；再把 7 9 9 3 2 5 的每个数字字符着色（7=琥珀 / 9=青 / 3=紫 / 2=绿 / 5=粉），运算符弱化为灰色。
 - 表达式可能很长（几千字符）：高度限制 + 渐隐 + "展开/收起"。
